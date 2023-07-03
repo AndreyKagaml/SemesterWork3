@@ -1,56 +1,93 @@
 package CarDav.models;
 
+import org.hibernate.annotations.Cascade;
+
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
-import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name = "car")
 public class Car {
+    @Id
+    @Column(name = "id_car")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id_car;
 
-    private int id_admin;
 
     @NotEmpty(message = "Brand shouldn\'d be empty")
+    @Column(name = "brand")
     private String brand;
 
     @NotEmpty(message = "Model shouldn\'d be empty")
+    @Column(name = "model")
     private String model;
 
-   // @Min(value = 1970, message = "Issue date must be greater then 1970")
-    private Date issue_date;
+    @Min(value = 1970, message = "Issue date must be greater then 1970")
+    @Column(name = "issue_date")
+    private int issue_date;
 
     @Min(value = 0, message = "Price must be greater then 0")
+    @Column(name = "price")
     private double price;
 
-    private int id_category;
+    @ManyToOne
+    @JoinColumn(name = "id_category", referencedColumnName = "id_category")
+    private Category category;
 
- //   @Pattern(regexp = "^[A-Z]{2} \\d{4} [A-Z]{2}$", message = "Incorrect plate format")
+    @Pattern(regexp = "^[A-Z]{2} \\d{4} [A-Z]{2}$", message = "Incorrect plate format")
+    @Column(name = "plate")
     private String plate;
 
+    @Column(name = "aveliable")
     private boolean aveliable;
 
+    @Column(name = "damage")
     private boolean damage;
 
+    @Column(name = "image")
     private String URLImage;
+
+
+    @OneToOne(mappedBy = "car")
+   // @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    private Order order;
+
+
 
     public Car() {
     }
 
-    public Car(int id_car, int id_admin, String brand,
-               String model, Date issue_date, double price,
-               int id_category, String plate, boolean aveliable,
+    public Car(String brand,
+               String model, int issue_date, double price,
+               String plate, boolean aveliable,
                boolean damage, String URLImage) {
-        this.id_car = id_car;
-        this.id_admin = id_admin;
         this.brand = brand;
         this.model = model;
         this.issue_date = issue_date;
         this.price = price;
-        this.id_category = id_category;
         this.plate = plate;
         this.aveliable = aveliable;
         this.damage = damage;
         this.URLImage = URLImage;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public int getId_car() {
@@ -59,14 +96,6 @@ public class Car {
 
     public void setId_car(int id_car) {
         this.id_car = id_car;
-    }
-
-    public int getId_admin() {
-        return id_admin;
-    }
-
-    public void setId_admin(int id_admin) {
-        this.id_admin = id_admin;
     }
 
     public String getBrand() {
@@ -85,11 +114,11 @@ public class Car {
         this.model = model;
     }
 
-    public Date getIssue_date() {
+    public int getIssue_date() {
         return issue_date;
     }
 
-    public void setIssue_date(Date issue_date) {
+    public void setIssue_date(int issue_date) {
         this.issue_date = issue_date;
     }
 
@@ -101,13 +130,13 @@ public class Car {
         this.price = price;
     }
 
-    public int getId_category() {
-        return id_category;
-    }
-
-    public void setId_category(int id_category) {
-        this.id_category = id_category;
-    }
+//    public int getId_category() {
+//        return id_category;
+//    }
+//
+//    public void setId_category(int id_category) {
+//        this.id_category = id_category;
+//    }
 
     public String getPlate() {
         return plate;

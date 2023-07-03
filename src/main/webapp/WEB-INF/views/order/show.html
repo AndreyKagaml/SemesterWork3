@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order </title>
+    <style>
+        body {
+            background-color: #333333;
+        }
+
+        form#registration{
+            background: #D3D3D3;
+            border-radius: 15px;
+            padding: 20px;
+            width: 420px;
+            font-family: 'Baloo Tammudu 2', cursive;
+        }
+
+        form#registration table tr td{
+            padding: 10px;
+        }
+
+        form#registration fieldset{
+            margin-bottom: 10px;
+            border-color: yellow;
+        }
+
+        form#registration legend {
+            color: #4169E1;
+            font-size: 18px;
+            font-weight: bold;
+            padding-bottom: 10px;
+            text-shadow: 0 1px 1px #C1F7FF;
+        }
+
+        form#registration fieldset label {
+            float: left;
+            font-size: 15px;
+            width: 110px;
+            padding: 0 0 0 30px;
+            width: auto;
+        }
+
+        .sub{
+            background: #7B68EE;
+            border: none;
+            border-radius: 20px;
+            color: #ffffff;
+            display: block;
+            letter-spacing: 1px;
+            font-family: 'Baloo Tammudu 2', cursive;
+            padding: 7px 25px;
+            margin: 7px;
+            font-weight: 50;
+            text-shadow: 0 1px 1px #C1F7FF;
+            text-transform: uppercase;
+        }
+
+    </style>
+</head>
+<body>
+
+
+
+<center>
+    <form id="registration">
+
+        <table >
+            <tr>
+                <td><a th:text="Order + ':'">VALUE</a></td>
+                <td style="color: #696969"><a th:text="${order.getDate_order()}">VALUE</a></td>
+                <td style="color: #696969"><a th:text="${order.getStatus().getType_status()}">VALUE</a></td>
+            </tr>
+            <tr>
+                <td><a th:text="Car + ':'">VALUE</a></td>
+                <td><a th:text="${order.getCar().getBrand()}">VALUE</a></td>
+                <td ><a th:text="${order.getCar().getModel()}">VALUE</a></td>
+            </tr>
+            <tr>
+                <td><a th:text="Client + ':'">VALUE</a></td>
+                <td style="color: #696969"><a th:text="${order.getUser().getName()}">VALUE</a></td>
+                <td style="color: #696969"><a th:text="${order.getUser().getSurname()}">VALUE</a></td>
+            </tr>
+            <tr>
+                <td><a th:text="Days + ' and ' + cost + ':'">VALUE</a></td>
+                <td><a th:text="${order.getRent_term()}">VALUE</a></td>
+                <td><a th:text="${order.getAmount_pay()}">VALUE</a></td>
+            </tr>
+
+            <tr>
+                <td><a th:text="Term + ':'">VALUE</a></td>
+                <td style="color: #696969"><a th:text="${order.getDate_start_use()}">VALUE</a></td>
+                <td style="color: #696969"><a th:text="${order.getDate_end_use()}">VALUE</a></td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </form>
+    <a  th:href="@{/orders/{id}/edit(id=${order.getId_order()})}">
+        <input class="sub" type="submit" value="Edit">
+    </a>
+
+    <form th:method="DELETE" th:action="@{/orders/{id}(id=${order.getId_order()})}">
+        <input class="sub" type="submit" value="Delete">
+    </form>
+</center>
+
+</body>
+</html>

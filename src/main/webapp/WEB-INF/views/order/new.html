@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>New order</title>
+</head>
+<body>
+<center>
+<form th:method="POST" th:action="@{/orders}" th:object="${NewOrder}" style="background: #D3D3D3;
+    border-radius: 15px;
+    padding: 20px;
+    width: 420px;
+    margin-top: 200px">
+
+
+
+  <fieldset style="margin-bottom: 10px;
+    border-color: yellow">      <!--для логічного угруповання об'єктів-->
+    <legend style="color: #4169E1;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-shadow: 0 1px 1px #C1F7FF">Ordering car</legend>       <!--визначає заголовок-->
+
+    <table class="alignment">
+      <tr>
+        <td><label for="car">Select car: </label></td>
+        <td><select th:object="${NewOrder.car}" th:field="*{id_car}" id="car">
+          <option th:each="car : ${Cars}" th:value="${car.getId_car()}" th:text="${car.getModel()}"/>
+
+        </select></td>
+      </tr>
+      <tr>
+        <td><label for="user">Enter category: </label></td>
+        <td><select th:object="${NewOrder.user}" th:field="*{id_user}" id="user">
+          <option th:each="client : ${Clients}" th:value="${client.getId_user()}" th:text="${client.getName()}"/>
+
+        </select></td>
+      </tr>
+      <tr>
+        <td><label for="year">Enter rent_term: </label></td>
+        <td><input type="text" th:field="*{rent_term}" id="year"></td>
+      </tr>
+
+      <tr>
+        <td><label for="start">Enter date start use: </label></td>
+        <td><input type="date" th:field="*{date_start_use}" id="start"></td>
+      </tr>
+
+    </table>
+  </fieldset>
+
+  <fieldset>
+    <input type="submit" value="Create order" style=" background: #FF7F50;
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    display: block;
+    letter-spacing: 1px;
+    margin: auto;
+    padding: 7px 25px;
+    text-shadow: 0 1px 1px #C1F7FF;
+    text-transform: uppercase">
+  </fieldset>
+
+</form>
+</center>
+</body>
+</html>

@@ -5,32 +5,97 @@
     <title>Edit car</title>
 </head>
 <body>
-<form th:method="PATCH" th:action="@{/cars/{id}(id=${car.getId_car()})}" th:object="${car}">
-    <label for="brand">Enter brand: </label>
-    <input type="text" th:field="*{brand}" id="brand">
-    <br/>
-    <label for="model">Enter model: </label>
-    <input type="text" th:field="*{model}" id="model">
-    <br/>
-    <label for="year">Enter year: </label>
-    <input type="text" th:field="*{issue_date}" id="year">
-    <br/>
-    <label for="price">Enter price: </label>
-    <input type="text" th:field="*{price}" id="price">
-    <br/>
-    <label for="category">Enter category: </label>
-    <input type="text" th:field="*{id_category}" id="category">
-    <br/>
-    <label for="plate">Enter plate: </label>
-    <input type="text" th:field="*{plate}" id="plate">
-    <br/>
-    <label for="image">Set image: </label>
-    <input type="text" th:field="*{URLImage}" id="image">
-    <br/>
-    <label for="admin">Set admin: </label>
-    <input type="text" th:field="*{id_admin}" id="admin">
-    <br/>
-  <input type="submit" value="Update">
+<center>
+<form th:method="PATCH" th:action="@{/cars/{id}(id=${car.getId_car()})}" th:object="${car}" style="background: #D3D3D3;
+    border-radius: 15px;
+    padding: 20px;
+    width: 420px;
+    margin-top: 200px">
+
+    <fieldset style="margin-bottom: 10px;
+    border-color: yellow">      <!--для логічного угруповання об'єктів-->
+        <legend style="color: #4169E1;
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    text-shadow: 0 1px 1px #C1F7FF">Editing car</legend>       <!--визначає заголовок-->
+
+        <table class="alignment">
+            <tr>
+                <td><label for="brand" style="float: left;
+    font-size: 15px;
+    width: 110px;
+    padding: 0 0 0 30px;
+    width: auto">Enter brand: </label></td>
+                <td><input type="text" th:field="*{brand}" id="brand"></td>
+            </tr>
+            <tr>
+                <td><label for="model" style="float: left;
+    font-size: 15px;
+    width: 110px;
+    padding: 0 0 0 30px;
+    width: auto">Enter model: </label></td>
+                <td><input type="text" th:field="*{model}" id="model"></td>
+            </tr>
+            <tr>
+                <td><label for="year" style="float: left;
+    font-size: 15px;
+    width: 110px;
+    padding: 0 0 0 30px;
+    width: auto">Enter year: </label></td>
+                <td><input type="text" th:field="*{issue_date}" id="year"></td>
+            </tr>
+            <tr>
+                <td><label for="price" style="float: left;
+    font-size: 15px;
+    width: 110px;
+    padding: 0 0 0 30px;
+    width: auto">Enter price: </label></td>
+                <td><input type="text" th:field="*{price}" id="price"></td>
+            </tr>
+            <tr>
+                <td><label for="category" style="float: left;
+    font-size: 15px;
+    width: 110px;
+    padding: 0 0 0 30px;
+    width: auto">Enter category: </label></td>
+                <td><select th:object="${car.category}" th:field="*{id_category}" id="category">
+                    <option th:each="category : ${Categories}" th:value="${category.getId_category()}" th:text="${category.getType()}"/>
+
+                </select></td>
+            </tr>
+            <tr>
+                <td><label for="plate" style="float: left;
+    font-size: 15px;
+    width: 110px;
+    padding: 0 0 0 30px;
+    width: auto">Enter plate: </label></td>
+                <td><input type="text" th:field="*{plate}" id="plate"></td>
+            </tr>
+            <tr>
+                <td><label for="image" style="float: left;
+    font-size: 15px;
+    width: 110px;
+    padding: 0 0 0 30px;
+    width: auto">Set image: </label></td>
+                <td><input type="text" th:field="*{URLImage}" id="image"></td>
+            </tr>
+        </table>
+    </fieldset>
+
+    <fieldset>
+        <input type="submit" value="Update" style=" background: #FF7F50;
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    display: block;
+    letter-spacing: 1px;
+    margin: auto;
+    padding: 7px 25px;
+    text-shadow: 0 1px 1px #C1F7FF;
+    text-transform: uppercase">
+    </fieldset>
 </form>
+</center>
 </body>
 </html>

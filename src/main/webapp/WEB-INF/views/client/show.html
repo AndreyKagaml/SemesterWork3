@@ -3,14 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <title>Client</title>
+    <style>
+        body {
+            background-color: #333333;
+        }
+
+        .nav {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        /*nav__link*/
+
+        #ram{
+            display: inline-block;
+            border: 3px solid #FFFFE0;
+            margin-top: 200px;
+            border-radius: 5px;
+        }
+
+
+        .nav__link_role {
+
+            vertical-align: top;
+            margin: 0 15px;
+            color: #eee9d6;
+            text-decoration: none;
+            transition: color 0.6s linear;
+            position: relative;
+
+            font-family: 'Baloo Tammudu 2', cursive;
+
+            padding: 8px 30px;
+            font-size: 20px;
+            font-weight: 700;
+
+        }
+
+        .nav__link {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0 15px;
+            color: #FF0000;
+            text-decoration: none;
+            transition: color 0.6s linear;
+            position: relative;
+            border-radius: 10px;
+            font-family: 'Baloo Tammudu 2', cursive;
+            border: 3px solid #FFFFE0;
+            padding: 8px 30px;
+            font-size: 20px;
+            font-weight: 700;
+
+        }
+        .nav__link:after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 3px;
+            opacity: 0;
+
+            position: absolute;
+            top: 100%;
+            left: 0;
+            z-index: 1;
+            transition: opacity .2s linear;
+        }
+
+
+        .nav__link:hover {
+            color: #00FF7F
+        }
+        .nav__link:hover:after {
+            opacity: 1;
+        }
+
+        .sub{
+            background: #7B68EE;
+            border: none;
+            border-radius: 20px;
+            color: #ffffff;
+            display: block;
+            letter-spacing: 1px;
+            font-family: 'Baloo Tammudu 2', cursive;
+            padding: 7px 25px;
+            margin: 7px;
+            font-weight: 50;
+            text-shadow: 0 1px 1px #C1F7FF;
+            text-transform: uppercase;
+        }
+    </style>
 </head>
 <body>
+<!--<a th:text="${user.getOrders().get(0).getId_order()}">VALUE</a>-->
 
-<a th:text="${client.getName()}">VALUE</a>
+<center>
+    <div id="ram">
+<a class="nav__link_role" th:text="${user.getUserRole().getRole()}">VALUE</a>
+    <br/>
 <br/>
-<a th:text="${client.getSurname()}">VALUE</a>
+<a class="nav__link" th:text="${user.getName() + ' ' + user.getSurname()}">VALUE </a>
+    <br/>
 <br/>
-<a th:text="${client.getPassport_id()}">VALUE</a>
+<a class="nav__link" th:text="Passport + ': ' + ${user.getPassport_id()}">VALUE</a>
 <br/>
+<br/>
+<a class="nav__link" th:text="Email + ': ' + ${user.getEmail()}">VALUE</a>
+<br/>
+    <br/>
+
+
+
+
+<div th:if = "${user.getUserRole().getId_role() == 2}">
+    <a href="/cars/new">
+        <input class="sub" type="submit" value="Add car">
+    </a>
+    <a href="/orders">
+        <input class="sub" type="submit" value="Show orders">
+    </a>
+    <a href="/cars/all">
+        <input class="sub" type="submit" value="Show cars">
+    </a>
+
+</div>
+
+<div th:if = "${user.getUserRole().getId_role() == 1}">
+<!--
+    <div th:each="cat : ${user.getCategories()}">
+        <a th:text="${cat.getType()}">VALUE</a>
+    </div>
+-->
+
+    <div th:if = "${user.getOrder() == null}">
+        <a href="/orders/new">
+            <input class="sub" type="submit" value="Order car">
+        </a>
+
+        <a href="/cars/available">
+            <input class="sub" type="submit" value="Show cars">
+        </a>
+        </div>
+
+
+    <div  th:if = "${user.getOrder() != null}">
+      <!--  <a th:text="${user.getOrder().getId_order()}">VALUE</a>-->
+        <a class="nav__link" style="color: #00FF7F" th:href="@{/orders/{id}(id=${user.getOrder().getId_order()})}" th:text="MyOrder">user</a>
+
+    </div>
+<br/>
+
+
+</div>
+    </div>
+</center>
+
+
 </body>
 </html>

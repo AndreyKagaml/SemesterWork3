@@ -3,21 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <title>Car</title>
+    <style>
+        body {
+            background-color: #333333;
+        }
+
+        form#registration{
+            background: #D3D3D3;
+            border-radius: 15px;
+            padding: 20px;
+            width: 420px;
+            font-family: 'Baloo Tammudu 2', cursive;
+        }
+
+        form#registration fieldset{
+            margin-bottom: 10px;
+            border-color: yellow;
+        }
+
+        form#registration legend {
+            color: #4169E1;
+            font-size: 18px;
+            font-weight: bold;
+            padding-bottom: 10px;
+            text-shadow: 0 1px 1px #C1F7FF;
+        }
+
+        form#registration fieldset label {
+            float: left;
+            font-size: 15px;
+            width: 110px;
+            padding: 0 0 0 30px;
+            width: auto;
+        }
+
+        form#registration button {
+            background: #FF7F50;
+            border: none;
+            border-radius: 20px;
+            color: #ffffff;
+            display: block;
+            font: 18px Georgia, "Times New Roman", Times, serif;
+            letter-spacing: 1px;
+            margin: auto;
+            padding: 7px 25px;
+            text-shadow: 0 1px 1px #C1F7FF;
+            text-transform: uppercase;
+        }
+
+        .sub{
+            background: #7B68EE;
+            border: none;
+            border-radius: 20px;
+            color: #ffffff;
+            display: block;
+            letter-spacing: 1px;
+            font-family: 'Baloo Tammudu 2', cursive;
+            padding: 7px 25px;
+            margin: 7px;
+            font-weight: 50;
+            text-shadow: 0 1px 1px #C1F7FF;
+            text-transform: uppercase;
+        }
+
+    </style>
 </head>
 <body>
-<a th:text="${car.getBrand()}">VALUE</a>
-<br/>
-<a th:text="${car.getModel()}">VALUE</a>
-<br/>
-<a th:text="${car.getIssue_date()}">VALUE</a>
-<br/>
-<a th:text="${car.getPrice()}">VALUE</a>
-<br/>
-<a th:text="${car.getId_category()}">VALUE</a>
-<br/>
-<a th:text="${car.getPlate()}">VALUE</a>
-<br/>
-<img src="${car.getURLImage()}">
-<br/>
+
+
+<center>
+<form id="registration">
+
+<table >
+    <tr>
+        <td><a th:text="${car.getBrand()}">VALUE</a></td>
+        <td ><a th:text="${car.getIssue_date()}">VALUE</a></td>
+    </tr>
+    <tr>
+        <td style="color: #696969"><a th:text="${car.getModel()}">VALUE</a></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td colspan="2"><img th:src="${car.getURLImage()}" style="padding: 20px;
+    width: 320px"></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td ><a th:text="Plate">VALUE</a></td>
+        <td ><a th:text="Category">VALUE</a></td>
+    </tr>
+    <tr>
+        <td style="color: #696969"><a th:text="${car.getPlate()}">VALUE</a></td>
+        <td style="color: #696969"><a th:text="${car.getCategory().getType()}">VALUE</a></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td><a th:text="'$' + ${car.getPrice()} + '/' + day">VALUE</a></td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+    </tr>
+</table>
+
+</form>
+
+<form th:method="DELETE" th:action="@{/cars/{id}(id=${car.getId_car()})}">
+    <input class="sub" type="submit" value="Delete">
+</form>
+</br>
+<a  th:href="@{/cars/{id}/edit(id=${car.getId_car()})}">
+    <input class="sub" type="submit" value="Edit">
+</a>
+</center>
+
+
+
+
+
+
+
+
 </body>
 </html>

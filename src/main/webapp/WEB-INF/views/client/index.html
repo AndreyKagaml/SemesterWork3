@@ -3,10 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>All clients</title>
+    <style>
+        h1 {
+            font-family: 'Baloo Tammudu 2', cursive;
+            font-size: 40px;
+            text-align: center;
+            color: #eee9d6;
+
+        }
+
+        body {
+            background-color: #333333;
+        }
+
+        .btn {
+            font-family: 'Baloo Tammudu 2', cursive;
+            text-decoration: none;
+            display: inline-block;
+            vertical-align: top;
+            border: 3px solid #eee9d6;
+            padding: 8px 30px;
+            color: #eee9d6;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 40px auto 0;
+            transition: background .6s linear, color .2s linear;
+        }
+
+        .btn:hover {
+            background-color: #eee9d6;
+            color: #000000;
+
+        }
+    </style>
 </head>
 <body>
-<div th:each = "client : ${clients}">
-  <a th:href="@{/client/{id}(id=${client.getId_client()})}" th:text = "${client.getName()}">user</a>
+
+<center>
+<div  th:each = "user : ${users}">
+  <a class="btn" th:href="@{/users/{id}(id=${user.getId_user()})}" th:text = "${user.getName() + ' ' + user.getSurname()}">user</a>
 </div>
+</center>
+
 </body>
 </html>

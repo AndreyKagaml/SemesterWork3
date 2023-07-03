@@ -3,10 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <title>All orders</title>
+    <style>
+        h1 {
+            font-family: 'Baloo Tammudu 2', cursive;
+            font-size: 40px;
+            text-align: center;
+            color: #eee9d6;
+
+        }
+
+        body {
+            background-color: #333333;
+        }
+
+        .btn {
+            font-family: 'Baloo Tammudu 2', cursive;
+            text-decoration: none;
+            display: inline-block;
+            vertical-align: top;
+            border: 3px solid #eee9d6;
+            padding: 8px 30px;
+            color: #eee9d6;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 40px auto 0;
+            transition: background .6s linear, color .2s linear;
+        }
+
+        .btn:hover {
+            background-color: #eee9d6;
+            color: #000000;
+
+        }
+    </style>
 </head>
 <body>
-<div th:each = "orderForm : ${orders}">
-  <a th:href="@{/car/{id}(id=${car.getId_car()})}" th:text = "${car.getModel()}">user</a>
+<center>
+<h1>Orders</h1>
+<div  th:each = "order : ${orders}">
+  <a class="btn" th:href="@{/orders/{id}(id=${order.getId_order()})}"
+     th:text = "${order.getUser().getName() + ' ' + order.getUser().getSurname()
+     + ' | ' + order.getCar().getBrand() + ' ' + order.getCar().getModel()
+     + ' | ' + order.getDate_start_use() + ' - ' + order.getDate_end_use()}">order</a>
+    <br/>
 </div>
+</center>
+<br/>
+<hr/>
+
+
+<div th:if = "${user.getUserRole().getId_role() == 2}">
+    <a  th:href="@{/cars/{id}/edit(id=${car.getId_car()})}">
+        <input type="submit" value="Edit">
+    </a>
+    <br/>
+    <form th:method="DELETE" th:action="@{/cars/{id}(id=${car.getId_car()})}">
+        <input type="submit" value="Delete">
+    </form>
+</div>
+
+
+
 </body>
 </html>
